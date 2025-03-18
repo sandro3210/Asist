@@ -14,10 +14,10 @@ interface EmployeePageProps extends SharedData {
 const { props } = usePage<EmployeePageProps>();
 const employees = computed(() => props.employees);
 
-const breadcrumbs: BreadcrumbItem[] = [{ title: 'Employees', href: '/employees' }];
+const breadcrumbs: BreadcrumbItem[] = [{ title: 'Empleados', href: '/employees' }];
 
 const deleteEmployee = async (id: number) => {
-    if (!window.confirm('Are you sure you want to delete this employee?')) return;
+    if (!window.confirm('¿Estás seguro de que deseas eliminar este empleado?')) return;
 
     router.delete(`/employees/${id}`, {
         preserveScroll: true,
@@ -25,32 +25,32 @@ const deleteEmployee = async (id: number) => {
             router.visit('/employees', { replace: true });
         },
         onError: (errors) => {
-            console.error('Error deleting employee', errors);
+            console.error('Error al eliminar el empleado', errors);
         }
     });
 };
 </script>
 
 <template>
-    <Head title="Employees" />
+    <Head title="Empleados" />
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-col gap-4 rounded-xl p-4">
             <div class="flex">
                 <Button as-child size="sm" class="bg-indigo-500 text-white hover:bg-indigo-700">
-                    <Link href="/employees/create"> <CirclePlus /> Create </Link>
+                    <Link href="/employees/create"> <CirclePlus /> Crear </Link>
                 </Button>
             </div>
 
             <div class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar/70 dark:border-sidebar-border md:min-h-min">
                 <Table>
-                    <TableCaption>Employee List.</TableCaption>
+                    <TableCaption>Lista de Empleados.</TableCaption>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>Name</TableHead>
-                            <TableHead>Email</TableHead>
-                            <TableHead>Position</TableHead>
-                            <TableHead class="text-right">Grade</TableHead>
-                            <TableHead class="text-center">Actions</TableHead>
+                            <TableHead>Nombre</TableHead>
+                            <TableHead>Correo Electrónico</TableHead>
+                            <TableHead>Posición</TableHead>
+                            <TableHead class="text-right">Grado</TableHead>
+                            <TableHead class="text-center">Acciones</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -59,7 +59,7 @@ const deleteEmployee = async (id: number) => {
                             <TableCell>{{ employee.email ?? 'N/A' }}</TableCell>
                             <TableCell>{{ employee.position ?? 'N/A' }}</TableCell>
                             <TableCell class="text-right">
-                                {{ new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(employee.grade) }}
+                                {{ new Intl.NumberFormat('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(employee.grade) }}
                             </TableCell>
                             <TableCell class="text-center">
                                 <div class="flex items-center gap-2 justify-center">

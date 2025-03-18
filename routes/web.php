@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\AssistanceController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\AsistenciaController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -22,6 +23,10 @@ Route::middleware(['auth', 'verified'])->group(function (){
     Route::put('/employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
     Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
 });
+Route::middleware(['auth'])->group(function () {
+    Route::inertia('/asistencia', 'Asistencia/Index')->name('asistencia');
+});
+
 
 Route::get('/assistances', [AssistanceController::class, 'index'])->name('assistances.index');
 Route::post('/assistances/check-in', [AssistanceController::class, 'checkIn'])->name('assistances.check-in');
